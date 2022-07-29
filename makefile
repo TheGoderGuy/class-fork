@@ -57,7 +57,15 @@ kind-logs:
 kind-logs-sales:
 	kubectl logs -l app=sales --all-containers=true -f --tail=100
 
+kind-restart:
+	kubectl rollout restart deployment sales-pod
 
+kind-update: all kind-load kind-restart
+
+kind-update-apply: all kind-load kind-apply
+
+kind-describe-deployment:
+	kubectl describe deployment sales-pod
 
 # ==============================================================================
 # Modules support
