@@ -1,4 +1,7 @@
 
+local:
+	go run app/services/sales-api/main.go
+
 # ==============================================================================
 # Modules support
 
