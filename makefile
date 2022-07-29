@@ -59,10 +59,10 @@ kind-status-sales:
 	kubectl get pods -o wide --watch --namespace=sales-system
 
 kind-logs:
-	kubectl logs -l app=sales --all-containers=true -f --tail=100
+	kubectl logs -l app=sales --all-containers=true -f --tail=100 | go run app/tooling/logfmt/main.go
 
 kind-logs-sales:
-	kubectl logs -l app=sales --all-containers=true -f --tail=100
+	kubectl logs -l app=sales --all-containers=true -f --tail=100 | go run app/tooling/logfmt/main.go
 
 kind-restart:
 	kubectl rollout restart deployment sales-pod
