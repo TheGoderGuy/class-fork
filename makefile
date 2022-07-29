@@ -19,6 +19,30 @@ sales:
 		.
 
 # ==============================================================================
+# Running from within k8s/kind
+
+KIND_CLUSTER := ardan-starter-cluster
+
+# Upgrade to latest Kind: brew upgrade kind
+# For full Kind v0.14 release notes: https://github.com/kubernetes-sigs/kind/releases/tag/v0.14.0
+# The image used below was copied by the above link and supports both amd64 and arm64.
+
+kind-up:
+	kind create cluster \
+		--image kindest/node:v1.24.0@sha256:0866296e693efe1fed79d5e6c7af8df71fc73ae45e3679af05342239cdc5bc8e \
+		--name $(KIND_CLUSTER) \
+		--config zarf/k8s/kind/kind-config.yaml
+
+kind-down:
+	kind delete cluster --name $(KIND_CLUSTER)
+
+kind-status:
+	kubectl get nodes -o wide
+	kubectl get svc -o wide
+	kubectl get pods -o wide --watch --all-namespaces
+
+
+# ==============================================================================
 # Modules support
 
 tidy:
