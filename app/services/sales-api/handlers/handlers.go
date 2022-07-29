@@ -6,6 +6,7 @@ import (
 	"net/http/pprof"
 	"os"
 
+	"github.com/ardanlabs/service/business/web/mid"
 	"github.com/ardanlabs/service/foundation/web"
 	"go.uber.org/zap"
 )
@@ -18,7 +19,7 @@ type APIMuxConfig struct {
 
 // APIMux constructs a http.Handler with all application routes defined.
 func APIMux(cfg APIMuxConfig) *web.App {
-	mux := web.NewApp(cfg.Shutdown)
+	mux := web.NewApp(cfg.Shutdown, mid.Logger(cfg.Log))
 
 	mux.Handle(http.MethodGet, "/test", test)
 
