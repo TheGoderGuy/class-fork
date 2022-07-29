@@ -62,7 +62,7 @@ kind-logs:
 	kubectl logs -l app=sales --all-containers=true -f --tail=100
 
 kind-logs-sales:
-	kubectl logs -l app=sales --all-containers=true -f --tail=100
+	kubectl logs -l app=sales --all-containers=true -f --tail=100 --namespace=sales-system
 
 kind-restart:
 	kubectl rollout restart deployment sales-pod
