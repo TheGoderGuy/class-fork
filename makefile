@@ -1,6 +1,9 @@
 
 local:
-	go run app/services/sales-api/main.go
+	go run app/services/sales-api/main.go | go run app/tooling/logfmt/main.go
+
+local-help:
+	go run app/services/sales-api/main.go --help
 
 # ==============================================================================
 # Building containers
