@@ -59,7 +59,10 @@ func (a *App) Handle(method string, path string, handler Handler, mw ...Middlewa
 			Now:     time.Now().UTC(),
 		}
 		ctx := context.WithValue(r.Context(), key, &v)
-		handler(ctx, w, r)
+		if err := handler(ctx, w, r); err != nil {
+			a.SignalShutdown()
+			return
+		}
 
 		// WE CAN DO WHAT WE WANT HERE
 	}
